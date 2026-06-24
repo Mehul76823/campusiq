@@ -12,7 +12,7 @@ interface CompareCollege extends CollegeSummary {
   topRecruiters?: string[];
   courses?: { id: string; name: string; duration: number; fees: number }[];
   establishedIn?: number;
-  accreditation?: string;
+  accreditation?: string | null;
   affiliation?: string;
 }
 
