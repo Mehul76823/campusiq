@@ -1,0 +1,189 @@
+@import url("https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --bg-primary: #0a0f1e;
+    --bg-secondary: #111827;
+    --bg-card: #1a2340;
+    --accent-primary: #4f6ef7;
+    --accent-amber: #f7a84f;
+    --text-primary: #e8f0ff;
+    --text-secondary: #8b9cc7;
+  }
+
+  * {
+    box-sizing: border-box;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    background-color: #0a0f1e;
+    color: #e8f0ff;
+    font-family: "Inter", sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  ::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: #0a0f1e;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: #243050;
+    border-radius: 3px;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: #4f6ef7;
+  }
+}
+
+@layer components {
+  .glass-card {
+    background: linear-gradient(
+      135deg,
+      rgba(26, 35, 64, 0.8) 0%,
+      rgba(10, 15, 30, 0.9) 100%
+    );
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(79, 110, 247, 0.12);
+    border-radius: 16px;
+  }
+
+  .glass-card:hover {
+    border-color: rgba(79, 110, 247, 0.25);
+    transform: translateY(-2px);
+    transition: all 0.2s ease;
+  }
+
+  .btn-primary {
+    background: linear-gradient(135deg, #4f6ef7 0%, #3a56e4 100%);
+    color: white;
+    font-family: "Syne", sans-serif;
+    font-weight: 600;
+    padding: 10px 24px;
+    border-radius: 10px;
+    border: none;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    box-shadow: 0 0 20px rgba(79, 110, 247, 0.3);
+  }
+
+  .btn-primary:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 30px rgba(79, 110, 247, 0.4);
+  }
+
+  .btn-ghost {
+    background: rgba(26, 35, 64, 0.6);
+    color: #8b9cc7;
+    font-family: "Syne", sans-serif;
+    font-weight: 500;
+    padding: 10px 20px;
+    border-radius: 10px;
+    border: 1px solid rgba(79, 110, 247, 0.15);
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+
+  .btn-ghost:hover {
+    border-color: rgba(79, 110, 247, 0.4);
+    color: #e8f0ff;
+    background: rgba(79, 110, 247, 0.1);
+  }
+
+  .input-field {
+    background: rgba(26, 35, 64, 0.6);
+    border: 1px solid rgba(79, 110, 247, 0.15);
+    border-radius: 10px;
+    padding: 12px 16px;
+    color: #e8f0ff;
+    font-family: "Inter", sans-serif;
+    transition: all 0.2s ease;
+    outline: none;
+    width: 100%;
+  }
+
+  .input-field:focus {
+    border-color: rgba(79, 110, 247, 0.5);
+    box-shadow: 0 0 0 3px rgba(79, 110, 247, 0.1);
+  }
+
+  .input-field::placeholder {
+    color: #4a5880;
+  }
+
+  .stat-box {
+    background: rgba(79, 110, 247, 0.08);
+    border: 1px solid rgba(79, 110, 247, 0.15);
+    border-radius: 12px;
+    padding: 16px;
+    text-align: center;
+  }
+
+  .tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    padding: 4px 10px;
+    border-radius: 6px;
+    font-size: 11px;
+    font-weight: 500;
+    font-family: "Syne", sans-serif;
+    letter-spacing: 0.02em;
+  }
+
+  .tag-gov {
+    background: rgba(79, 110, 247, 0.15);
+    color: #7b93f9;
+    border: 1px solid rgba(79, 110, 247, 0.2);
+  }
+
+  .tag-private {
+    background: rgba(247, 168, 79, 0.12);
+    color: #f7a84f;
+    border: 1px solid rgba(247, 168, 79, 0.2);
+  }
+
+  .tag-deemed {
+    background: rgba(139, 156, 199, 0.12);
+    color: #b0bdd9;
+    border: 1px solid rgba(139, 156, 199, 0.2);
+  }
+
+  .shimmer {
+    background: linear-gradient(
+      90deg,
+      rgba(26, 35, 64, 0.8) 25%,
+      rgba(36, 48, 80, 0.8) 50%,
+      rgba(26, 35, 64, 0.8) 75%
+    );
+    background-size: 200% 100%;
+    animation: shimmer 2s infinite;
+  }
+
+  .rating-star {
+    color: #f7a84f;
+  }
+
+  .section-label {
+    font-family: "JetBrains Mono", monospace;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: #4f6ef7;
+  }
+}
