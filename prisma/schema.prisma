@@ -15,80 +15,123 @@ model User {
   createdAt     DateTime  @default(now())
   savedColleges SavedCollege[]
   reviews       Review[]
+
+  @@index([createdAt])
 }
 
 model College {
-  id            String    @id @default(cuid())
-  name          String
-  slug          String    @unique
-  location      String
-  city          String
-  state         String
-  type          CollegeType
-  establishedIn Int
-  rating        Float     @default(0)
-  reviewCount   Int       @default(0)
-  totalFees     Int       // Annual fees in INR
-  ranking       Int?
-  nirf          Int?      // NIRF ranking
-  logo          String?
-  coverImage    String?
-  description   String?
-  website       String?
-  phone         String?
-  email         String?
-  accreditation String?   // NAAC grade
-  affiliation   String?
+  id             String    @id @default(cuid())
+  name           String
+  slug           String    @unique
+  location       String
+  city           String
+  state          String
+  type           CollegeType
+  establishedIn  Int
+  rating         Float     @default(0)
+  reviewCount    Int       @default(0)
+  totalFees      Int
+  ranking        Int?
+  nirf           Int?
+  logo           String?
+  coverImage     String?
+  description    String?
+  website        String?
+  phone          String?
+  email          String?
+  accreditation  String?
+  affiliation    String?
 
   // Placement stats
-  avgPackage    Float?    // LPA
-  highestPackage Float?   // LPA
-  placementRate Float?    // Percentage
-  topRecruiters String[]
+  avgPackage      Float?
+  highestPackage  Float?
+  placementRate   Float?
+  topRecruiters   String[]
 
   // Entrance exams accepted
   examsAccepted String[]
 
-  courses       Course[]
-  reviews       Review[]
-  savedBy       SavedCollege[]
+  courses Course[]
+  reviews Review[]
+  savedBy SavedCollege[]
 
-  createdAt     DateTime  @default(now())
-  updatedAt     DateTime  @updatedAt
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([state])
+  @@index([city])
+  @@index([type])
+  @@index([rating])
+  @@index([totalFees])
+  @@index([nirf])
 }
 
 model Course {
-  id          String    @id @default(cuid())
-  name        String
-  duration    Int       // In years
-  fees        Int       // Annual INR
-  seats       Int?
-  college     College   @relation(fields: [collegeId], references: [id], onDelete: Cascade)
-  collegeId   String
+  id        String   @id @default(cuid())
+  name      String
+  duration  Int
+  fees      Int
+  seats     Int?
+
+  college   College  @relation(
+    fields: [collegeId],
+    references: [id],
+    onDelete: Cascade
+  )
+
+  collegeId String
 }
 
 model Review {
-  id          String    @id @default(cuid())
-  rating      Float
-  title       String
-  body        String
-  batch       Int?      // Graduation year
-  user        User      @relation(fields: [userId], references: [id])
-  userId      String
-  college     College   @relation(fields: [collegeId], references: [id], onDelete: Cascade)
-  collegeId   String
-  createdAt   DateTime  @default(now())
+  id        String   @id @default(cuid())
+  rating    Float
+  title     String
+  body      String
+  batch     Int?
+  
+  user      User     @relation(
+    fields: [userId],
+    references: [id]
+  )
+
+  userId    String
+
+  college   College  @relation(
+    fields: [collegeId],
+    references: [id],
+    onDelete: Cascade
+  )
+
+  collegeId String
+
+  createdAt DateTime @default(now())
+
+  @@index([collegeId, createdAt])
+  @@index([userId])
 }
 
 model SavedCollege {
-  id          String    @id @default(cuid())
-  user        User      @relation(fields: [userId], references: [id])
-  userId      String
-  college     College   @relation(fields: [collegeId], references: [id], onDelete: Cascade)
-  collegeId   String
-  savedAt     DateTime  @default(now())
+  id        String   @id @default(cuid())
+
+  user      User     @relation(
+    fields: [userId],
+    references: [id]
+  )
+
+  userId    String
+
+  college   College  @relation(
+    fields: [collegeId],
+    references: [id],
+    onDelete: Cascade
+  )
+
+  collegeId String
+
+  savedAt   DateTime @default(now())
 
   @@unique([userId, collegeId])
+  @@index([userId, savedAt])
 }
 
 enum CollegeType {
